@@ -27,6 +27,15 @@ async def display(request, path):
 async def stop_animation(request):
     return ribbon.stop_animation()
 
+@app.route('/api/set/speed/')
+async def set_speed(request):
+    ribbon.speed = int(request.args['value'])
+
+@app.route('/api/set/fps/')
+async def set_fps(request):
+    ribbon.fps = int(request.args['value'])
+
+
 @app.route('/api/reset')
 async def reset(request):
     return ribbon.reset()

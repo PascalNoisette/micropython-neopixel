@@ -28,6 +28,54 @@
 
         // Append the button to the body
         document.body.appendChild(button);
+    };
+  
+    addFormWithAjax = (method, url) => {
+        // Create a new form element
+        var form = document.createElement('form');
+        form.style.cssText = 'margin: 1px;';
+        // Create an input text field
+        var label = document.createElement('label');
+        label.innerHTML = `${method} ${url}`;
+        form.appendChild(label);
+        // Create an input text field
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'value';
+        input.placeholder = 'Enter text';
+        form.appendChild(input);
+
+        // Create a submit button
+        var submitButton = document.createElement('button');
+        submitButton.type = 'submit';
+        submitButton.innerHTML = 'Submit';
+        form.appendChild(submitButton);
+
+        // Define the AJAX request function
+        form.onsubmit = function(event) {
+            event.preventDefault();  // Prevent the form from submitting the traditional way
+            var xhr = new XMLHttpRequest();
+            var query = '';
+            if (method == 'GET') {
+              query = `/?${input.name}=` + encodeURIComponent(input.value);
+            }
+            xhr.open(method, url + query, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert('Response: ' + xhr.responseText);
+                }
+            };
+            var data = null;
+            if (method == 'POST') {          
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              data = `${input.name}=` + encodeURIComponent(input.value);
+            }
+            xhr.send(data);
+        };
+
+
+        // Append the form to the body
+        document.body.appendChild(form);
     }
     window.onload = () => {
         addButtonWithAjax("GET", "./api/start_animation/cycle");
@@ -36,7 +84,8 @@
         addButtonWithAjax("GET", "./api/display/white");
         addButtonWithAjax("GET", "./api/stop_animation");
         addButtonWithAjax("GET", "./api/reset");
-        
+        addFormWithAjax("GET", "./api/set/speed")
+        addFormWithAjax("GET", "./api/set/fps");
     }
   </script>
   </body>
