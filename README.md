@@ -1,16 +1,31 @@
+## Simulation testing (computer)
+
+The stub file `machine.py` and `neopixel.py` are a tkinter simulation of the microcontroller and neopixel.
+
+```
+git clone https://github.com/PascalNoisette/micropython-neopixel.git
+python .\test.py
+```
+
+![Simlator screenshot](./Capture.PNG)
 
 
-## Requirements
+## Hardware installation (microcontroller)
+
+
+* You will need micropython https://micropython.org/download/ESP32_GENERIC_C3/ setup.
+
+You must also install the microdot library. I suggest using the following package.
 
 ```
 import mip
 mip.install("github:brainelectronics/micropython-esp-wifi-manager")
-
-import webrepl_setup
 ```
 
-## Install
 
+* The animation is lightweight so it can run alongside other programs such as the wifi-manager and web_repl. See the [example boot file](boot.py).
+
+* You can use webrepl-client to ship the file to the board.
 
 ```
 git clone https://github.com/micropython/webrepl.git webrepl-client
@@ -25,10 +40,12 @@ cd webrepl-client
 
 Do not copy stub `machine.py` and `neopixel.py`
 
-## Simulation testing
+## Software architecture
 
-The stub file `machine.py` and `neopixel.py` are a tkinter simulation of the microcontroller and neopixel.
+* `swagger.py` can start a webserver to serve swagger.html and answer to http request to switch the animation
+* `ribbon.py` is a wrapper around the library neopixel.NeoPixel and handling a clock.
+* `animation.py` are a set of functions to fill a neopixel.NeoPixel array with colors.
 
-```
-python .\test.py
-```
+## Credit
+
+The file `rainbowio.py` is a local copy of https://docs.circuitpython.org/en/latest/shared-bindings/rainbowio/index.html in python.
