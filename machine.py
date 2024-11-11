@@ -9,8 +9,9 @@ class Timer:
         pass
 
     def init(self, period, mode, callback):
+        print(f"period is {period}")
         callback(1)
-        root.after(100, lambda: self.init(period, mode, callback))
+        root.after(period, lambda: self.init(period, mode, callback))
 
 
 def Pin(a):
