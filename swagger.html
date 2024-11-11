@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="SwaggerUI" />
+    <title>SwaggerUI</title>
+  </head>
+  <body>
+  <script>
+    addButtonWithAjax = (method, url) => {
+        // Create a new button element
+        var button = document.createElement('button');
+        button.innerHTML = `${method} ${url}`;
+        button.style.cssText = 'margin: 1px;';
+
+        // Set the onclick event to the AJAX request function
+        button.onclick = () => {
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert('Response:', xhr.responseText);
+                }
+            };
+            xhr.send();
+        };
+
+        // Append the button to the body
+        document.body.appendChild(button);
+    }
+    window.onload = () => {
+        addButtonWithAjax("GET", "./api/start_animation/cycle");
+        addButtonWithAjax("GET", "./api/start_animation/change_color");
+        addButtonWithAjax("GET", "./api/display/clean");
+        addButtonWithAjax("GET", "./api/display/white");
+        addButtonWithAjax("GET", "./api/stop_animation");
+        addButtonWithAjax("GET", "./api/reset");
+        
+    }
+  </script>
+  </body>
+</html>
