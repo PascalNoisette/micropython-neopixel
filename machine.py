@@ -1,13 +1,17 @@
-import datetime, threading
+import tkinter as tk
+
+root = tk.Tk()
+root.title("Circular NeoPixel Simulation")
 
 class Timer:
     PERIODIC = 1
     def __init__(self, i):
         pass
+
     def init(self, period, mode, callback):
         callback(1)
-        threading.Timer(period/1000, lambda:  self.init(period, mode, callback)).start()
+        root.after(100, lambda: self.init(period, mode, callback))
 
-    
+
 def Pin(a):
     pass

@@ -19,7 +19,7 @@ class Ribbon:
 
     def generate(self):
         while True:
-            self.elapsedMs = self.elapsedMs + 1/self.fps*1000
+            self.elapsedMs = self.elapsedMs + 1
             yield int(self.elapsedMs)
 
     def stop_animation(self):
@@ -30,7 +30,7 @@ class Ribbon:
         machine.reset()
 
     def start_animation(self, callback):
-        self.timer.init(period=int(1/self.fps*1000), mode=Timer.PERIODIC, callback=lambda t: callback(self.np, self.num_pixels, next(self.elapsed), self.speed))
+        self.timer.init(period=int(1000/self.fps), mode=Timer.PERIODIC, callback=lambda t: callback(self.np, self.num_pixels, next(self.elapsed), self.speed))
 
     def display(self, callback):
         callback(self.np, self.num_pixels, next(self.elapsed), self.speed)

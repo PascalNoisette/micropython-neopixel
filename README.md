@@ -24,3 +24,11 @@ cd webrepl-client
 ```
 
 Do not copy stub `machine.py` and `neopixel.py`
+
+## Simulation testing
+
+The stub file `machine.py` and `neopixel.py` are a tkinter simulation of the microcontroller and neopixel.
+
+```
+python .\test.py
+```

@@ -11,6 +11,11 @@ def white(np, num_pixels, time, speed):
     np.write()
 
 
+def red(np, num_pixels, time, speed):
+    np.fill((255, 0, 0))
+    np.write()
+
+
 
 def change_color(np, num_pixels, time, speed):
     for i in range(num_pixels):
